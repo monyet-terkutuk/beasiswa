@@ -1,4 +1,4 @@
-@extends('layouts.operator')
+@extends('layouts.wali_kelas')
 
 @section('content')
     <!-- row 1 -->
