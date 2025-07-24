@@ -1,4 +1,4 @@
-@extends('layouts.operator')
+@extends('layouts.wali_kelas')
 
 @section('content')
     <div class="flex flex-wrap mt-6 -mx-3">
@@ -7,11 +7,11 @@
                 class="relative flex flex-col min-w-0 break-words bg-white border-0 shadow-xl  border-black-125 rounded-2xl bg-clip-border">
                 <div class="p-6 m-[40px] rounded-t-4">
                     <div class="flex justify-between items-center">
-                        <h6 class="mb-2 dark:text-white">Data Sosial Ekonomi</h6>
-                        <a href="{{ route('sosial-ekonomi.create') }}"
+                        <h6 class="mb-2 dark:text-white font-bold">Report Data Beasiswa</h6>
+                        {{-- <a href="{{ route('sosial-ekonomi.create') }}"
                             class="inline-block px-4 py-2 text-sm font-semibold text-white bg-gradient-to-tl from-blue-500 to-violet-500 rounded-lg shadow-md hover:-translate-y-px transition-all duration-150 ease-in-out">
                             <i class="fas fa-plus mr-1"></i> Tambah Data
-                        </a>
+                        </a> --}}
                     </div>
                 </div>
 
@@ -28,8 +28,9 @@
                                 <th class="p-2 text-sm text-center dark:text-white">PKH</th>
                                 <th class="p-2 text-sm text-center dark:text-white">DTKS</th>
                                 <th class="p-2 text-sm text-center dark:text-white">SKTM</th>
-                                <th class="p-2 text-sm text-center dark:text-white">Seleksi</th>
-                                <th class="p-2 text-sm text-center dark:text-white">Aksi</th>
+                                <th class="p-2 text-sm text-center dark:text-white">Kelayakan</th>
+                                <th class="p-2 text-sm text-center dark:text-white">Status</th>
+                                {{-- <th class="p-2 text-sm text-center dark:text-white">Lihat</th> --}}
                             </tr>
                         </thead>
                         <tbody>
@@ -58,44 +59,29 @@
                                     <td class="p-2 text-center dark:text-white dark:opacity-80">
                                         {{ $item->sktm ? 'Ya' : 'Tidak' }}
                                     </td>
-                                    <td class="p-2 text-center dark:text-white dark:opacity-80 space-x-1">
-                                        @if ($item->fuzzyMamdani)
-                                            <span
-                                                class="inline-block px-3 py-1 text-xs font-bold uppercase text-white {{ $item->fuzzyMamdani->status == 'layak' ? 'bg-green-500/80' : 'bg-red-500' }} rounded-full">
-                                                {{ ucfirst($item->fuzzyMamdani->status) }}
-                                            </span>
-                                        @else
-                                            <form action="{{ route('seleksi-kelayakan', $item->id_sosial_ekonomi) }}" method="POST"
-                                                class="inline-block">
-                                                @csrf
-                                                <button type="submit"
-                                                    class="inline-block px-3 py-3 font-bold text-center text-white uppercase align-middle transition-all rounded-lg cursor-pointer bg-gradient-to-tl from-blue-500 to-violet-500 leading-normal text-xs ease-in tracking-tight-rem shadow-md hover:-translate-y-px active:opacity-85 hover:shadow-md">
-                                                    <p>Seleksi Kelayakan</p>
-                                                </button>
-                                            </form>
-                                        @endif
+                                    <td class="p-2 text-center">
+                                        <p class="mb-0 text-xs font-semibold leading-tight">
+                                            {{ $item->fuzzyMamdani->kelayakan }}%
+                                        </p>
                                     </td>
-                                    <td class="p-2 text-center dark:text-white dark:opacity-80 space-x-1">
-                                        <a href="{{ route('sosial-ekonomi.edit', $item->id_sosial_ekonomi) }}"
-                                            class="inline-block px-3 py-3 font-bold text-center text-white uppercase align-middle transition-all rounded-lg cursor-pointer bg-gradient-to-tl from-orange-500 to-yellow-500 leading-normal text-xs ease-in tracking-tight-rem shadow-md hover:-translate-y-px active:opacity-85 hover:shadow-md">
-                                            <i class="fas fa-edit"></i>
+                                    <td class="p-2 text-center">
+                                        <span
+                                            class="inline-block px-2 py-1 text-white text-xs font-semibold rounded-lg
+                                                                                                                {{ $item->fuzzyMamdani->status === 'layak' ? 'bg-green-500' : 'bg-red-500' }}">
+                                            {{ ucfirst($item->fuzzyMamdani->status) }}
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <a href="{{ route('walikelas.report.show', $item->id_sosial_ekonomi) }}"
+                                            class="px-3 py-3 font-bold text-center text-white uppercase align-middle transition-all rounded-lg cursor-pointer bg-gradient-to-tl from-blue-500 to-blue-300 leading-normal text-xs ease-in tracking-tight-rem shadow-md hover:-translate-y-px active:opacity-85 hover:shadow-md">
+                                            <i class="fas fa-eye"></i>
                                         </a>
-                                        <form action="{{ route('sosial-ekonomi.destroy', $item->id_sosial_ekonomi) }}"
-                                            method="POST" class="inline-block"
-                                            onsubmit="return confirm('Yakin ingin menghapus data ini?')">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit"
-                                                class="inline-block px-3 py-3 font-bold text-center text-white uppercase align-middle transition-all rounded-lg cursor-pointer  bg-gradient-to-tl from-red-600 to-orange-600 leading-normal text-xs ease-in tracking-tight-rem shadow-md hover:-translate-y-px active:opacity-85 hover:shadow-md">
-                                                <i class="fas fa-trash"></i>
-                                            </button>
-                                        </form>
                                     </td>
                                 </tr>
                             @empty
                                 <tr>
                                     <td colspan=11" class="p-4 text-center text-sm text-slate-500 dark:text-white/60">
-                                        Tidak ada data sosial ekonomi.
+                                        Tidak ada data beasiswa.
                                     </td>
                                 </tr>
                             @endforelse

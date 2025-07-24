@@ -14,11 +14,9 @@ class FuzzyMamdaniController extends Controller
     {
         $data = SosialEkonomi::findOrFail($id);
 
-        // 🧠 Proses Fuzzy Mamdani — logika dummy (ganti dengan logika fuzzy kamu)
         $nilai = $this->hitungFuzzy($data);
         $status = $nilai >= 50 ? 'layak' : 'tidak_layak';
 
-        // 📝 Simpan ke tabel fuzzy_mamdani
         FuzzyMamdani::create([
             'id_fuzzy' => Str::uuid(),
             'id_sosial_ekonomi' => $data->id_sosial_ekonomi,
@@ -32,10 +30,8 @@ class FuzzyMamdaniController extends Controller
 
     private function hitungFuzzy($data)
     {
-        // Contoh logika dummy: kamu bisa ubah dengan hitungan fuzzy sebenarnya
         $skor = 0;
 
-        // Misalnya nilai rendah = layak
         $skor += (float) $data->jml_penghasilan < 1000000 ? 40 : 10;
         $skor += (int) $data->tanggungan >= 3 ? 30 : 10;
         $skor += in_array(strtolower($data->aset), ['motor', 'tidak ada']) ? 20 : 5;
@@ -57,3 +53,6 @@ class FuzzyMamdaniController extends Controller
 // jumlah penghasilan, di buat range gaji
 
 // laporan semua data lengkap dari seluruh database siswa, sosial ekonomi, dan fuzzy mamdani
+
+
+// nis, nama, gender, sosial ekonomi, fuzzy mamdani dan kelayakan

@@ -42,18 +42,32 @@
                                     class="focus:shadow-primary-outline text-sm block w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-gray-700 focus:border-blue-500 focus:outline-none">
                             </div>
 
-                            <div>
-                                <label for="tempat_tinggal"
-                                    class="block text-sm font-semibold py-2 text-slate-700 mb-1">Tempat Tinggal</label>
-                                <input type="text" name="tempat_tinggal" id="tempat_tinggal"
+                            <div class="mb-4">
+                                <label for="aset" class="block text-sm font-semibold py-2 text-slate-700 mb-1">Aset</label>
+                                <input type="text" name="aset" id="aset"
                                     class="focus:shadow-primary-outline text-sm block w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-gray-700 focus:border-blue-500 focus:outline-none">
                             </div>
+
+
                         </div>
 
-                        <div class="mb-4">
-                            <label for="aset" class="block text-sm font-semibold py-2 text-slate-700 mb-1">Aset</label>
-                            <input type="text" name="aset" id="aset"
+
+                        <div>
+                            <label for="tempat_tinggal" class="block text-sm font-semibold py-2 text-slate-700 mb-1">Tempat
+                                Tinggal</label>
+
+                            <label for="tempat_tinggal"
+                                class="inline-block cursor-pointer px-4 py-2 text-sm font-semibold text-white bg-blue-500 rounded-lg shadow-md hover:shadow-lg active:opacity-85">
+                                Pilih File
+                            </label>
+                            <span id="tempat_tinggal-filename" class="ml-2 text-sm text-gray-600">Belum ada file</span>
+
+                            <input type="file" name="tempat_tinggal" id="tempat_tinggal" class="hidden"
+                                onchange="updateFileName('tempat_tinggal')">
+
+                            {{-- <input type="text" name="tempat_tinggal" id="tempat_tinggal"
                                 class="focus:shadow-primary-outline text-sm block w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-gray-700 focus:border-blue-500 focus:outline-none">
+                            --}}
                         </div>
 
                         <div class="mb-4">

@@ -48,7 +48,7 @@
                                     <td class="p-2 text-center">
                                         <span
                                             class="inline-block px-2 py-1 text-white text-xs font-semibold rounded-lg
-                                                                            {{ $item->status === 'layak' ? 'bg-green-500' : 'bg-red-500' }}">
+                                                                                    {{ $item->status === 'layak' ? 'bg-green-500' : 'bg-red-500' }}">
                                             {{ ucfirst($item->status) }}
                                         </span>
                                     </td>

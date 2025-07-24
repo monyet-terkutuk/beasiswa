@@ -32,18 +32,19 @@ class SosialEkonomiController extends Controller
         'nisn' => 'required|exists:siswa,nisn',
         'jml_penghasilan' => 'required',
         'tanggungan' => 'required',
-        'tempat_tinggal' => 'required',
+        // 'tempat_tinggal' => 'required',
         'aset' => 'required',
+        'tempat_tinggal' => 'nullable|file|mimes:pdf,jpg,jpeg,png|max:2048',
         'pkh' => 'nullable|file|mimes:pdf,jpg,jpeg,png|max:2048',
         'dtks' => 'nullable|file|mimes:pdf,jpg,jpeg,png|max:2048',
         'sktm' => 'nullable|file|mimes:pdf,jpg,jpeg,png|max:2048',
     ]);
 
     $data = $request->only([
-        'nisn', 'jml_penghasilan', 'tanggungan', 'tempat_tinggal', 'aset'
+        'nisn', 'jml_penghasilan', 'tanggungan', 'aset'
     ]);
 
-    foreach (['pkh', 'dtks', 'sktm'] as $field) {
+    foreach (['tempat_tinggal', 'pkh', 'dtks', 'sktm'] as $field) {
         if ($request->hasFile($field)) {
             $data[$field] = $request->file($field)->store("uploads/sosial_ekonomi", "public");
         }
@@ -68,8 +69,8 @@ class SosialEkonomiController extends Controller
             'nisn' => 'required|exists:siswa,nisn',
             'jml_penghasilan' => 'nullable|numeric',
             'tanggungan' => 'nullable|integer',
-            'tempat_tinggal' => 'nullable|string',
             'aset' => 'nullable|string',
+            'tempat_tinggal' => 'boolean',
             'pkh' => 'boolean',
             'dtks' => 'boolean',
             'sktm' => 'boolean',

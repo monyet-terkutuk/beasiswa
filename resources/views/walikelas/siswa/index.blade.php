@@ -9,7 +9,7 @@
                     <div class="flex justify-between items-center">
                         <h6 class="mb-2 ">Daftar Siswa</h6>
                         {{-- Tombol Tambah Siswa --}}
-                        <a href="{{ route('siswa.create') }}"
+                        <a href="{{ route('walikelas.siswa.create') }}"
                             class="inline-block px-4 py-2 text-sm font-semibold text-white bg-gradient-to-tl from-blue-500 to-violet-500 rounded-lg shadow-md hover:-translate-y-px transition-all duration-150 ease-in-out">
                             <i class="fas fa-plus mr-1"></i> Tambah Siswa
                         </a>
